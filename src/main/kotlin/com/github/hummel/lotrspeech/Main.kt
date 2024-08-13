@@ -15,7 +15,7 @@ fun main() {
 	translateFiles(folderPath, targetLanguage)
 }
 
-fun translateFiles(folderPath: String, targetLanguage: String) {
+private fun translateFiles(folderPath: String, targetLanguage: String) {
 	val folder = File(folderPath)
 	translateFilesRecursive(folder, targetLanguage)
 }
@@ -33,7 +33,7 @@ private fun translateFilesRecursive(file: File, targetLanguage: String) {
 	}
 }
 
-fun translateText(text: String, targetLanguage: String): String {
+private fun translateText(text: String, targetLanguage: String): String {
 	val apiUrl = "https://translate.googleapis.com/translate_a/single"
 	val parameters = mapOf(
 		"client" to "gtx",
@@ -56,7 +56,7 @@ fun translateText(text: String, targetLanguage: String): String {
 	}
 }
 
-fun parseTranslatedText(jsonResponse: String): String {
+private fun parseTranslatedText(jsonResponse: String): String {
 	val jsonElement = JsonParser.parseString(jsonResponse)
 	val translationsArray = jsonElement.asJsonArray[0].asJsonArray
 	val translatedText = StringBuilder()
@@ -70,7 +70,7 @@ fun parseTranslatedText(jsonResponse: String): String {
 	return "$translatedText"
 }
 
-fun readConfigFile(): Map<String, String> {
+private fun readConfigFile(): Map<String, String> {
 	val configFile = File("config.json")
 	if (!configFile.exists()) {
 		return emptyMap()
